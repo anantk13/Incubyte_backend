@@ -6,9 +6,16 @@ const { connectDB } = require('./config/db');
 // Initialize Express app
 const app = express();
 
-// Middleware - Configure CORS to allow frontend on port 3000 or 3001
+// Middleware - Configure CORS to allow frontend on port 3000 or 3001 and production
 const corsOptions = {
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: [
+        'http://localhost:3000',
+        'http://localhost:3001',
+        'https://incubyte-frontend.vercel.app', // Update this with your actual Vercel URL
+        'https://incubyte-frontend.netlify.app', // Update this with your actual Netlify URL
+        /\.vercel\.app$/, // Allow all Vercel preview deployments
+        /\.netlify\.app$/, // Allow all Netlify preview deployments
+    ],
     credentials: true,
 };
 app.use(cors(corsOptions));
